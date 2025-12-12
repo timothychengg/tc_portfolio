@@ -11,10 +11,10 @@ interface Metric {
 }
 
 const metrics: Metric[] = [
-  { value: '8', label: 'Production Apps', icon: '🚀' },
-  { value: '95+', label: 'Lighthouse Score', icon: '💻' },
-  { value: '12', label: 'Tech Stack', icon: '⚡' },
-  { value: '3+', label: 'Years Experience', icon: '⭐' },
+  { value: '4', label: 'Companies', icon: '🚀' },
+  { value: '18%', label: 'Bundle Reduction', icon: '💻' },
+  { value: '50%', label: 'Traffic Reduction', icon: '⚡' },
+  { value: '2+', label: 'Years Experience', icon: '⭐' },
 ];
 
 export default function Metrics() {

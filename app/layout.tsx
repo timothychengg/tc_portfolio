@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { ToastProvider } from '@/components/ToastProvider';
 import { ColorSchemeProvider } from '@/contexts/ColorSchemeContext';
 import StructuredData from '@/components/StructuredData';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -90,13 +91,15 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className={`${nunito.className} ${poppins.variable}`}>
-        <ColorSchemeProvider>
-          <ToastProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </ToastProvider>
-        </ColorSchemeProvider>
+        <ErrorBoundary>
+          <ColorSchemeProvider>
+            <ToastProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </ToastProvider>
+          </ColorSchemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

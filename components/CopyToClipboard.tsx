@@ -35,17 +35,12 @@ export default function CopyToClipboard({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       title={copied ? 'Copied!' : 'Copy to clipboard'}
+      aria-label={copied ? 'Copied!' : 'Copy to clipboard'}
     >
       {copied ? (
-        <>
-          <Check className='w-4 h-4 text-green-400' />
-          <span className='text-sm text-green-400'>Copied!</span>
-        </>
+        <Check className='w-4 h-4 text-green-400' />
       ) : (
-        <>
-          <Copy className='w-4 h-4' />
-          <span className='text-sm'>{text}</span>
-        </>
+        <Copy className='w-4 h-4 text-gray-400 hover:text-primary-400 transition-colors' />
       )}
     </motion.button>
   );

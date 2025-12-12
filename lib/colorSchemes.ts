@@ -259,4 +259,4 @@ export const colorSchemes: Record<ColorSchemeId, ColorScheme> = {
   },
 };
 
-export const defaultColorScheme: ColorSchemeId = 'purple-cyan';
+export const defaultColorScheme: ColorSchemeId = 'indigo-magenta';

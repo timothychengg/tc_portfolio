@@ -57,8 +57,15 @@ export default function StarfieldBackground() {
     };
     resizeCanvas();
 
-    // Initialize stars
-    const numStars = 200;
+    // Initialize stars - responsive count based on screen size
+    const getStarCount = () => {
+      if (typeof window === 'undefined') return 200;
+      const width = window.innerWidth;
+      if (width < 640) return 100; // Mobile: fewer stars
+      if (width < 1024) return 150; // Tablet: medium stars
+      return 200; // Desktop: full stars
+    };
+    const numStars = getStarCount();
     starsRef.current = Array.from({ length: numStars }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -89,6 +96,22 @@ export default function StarfieldBackground() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+
+    // Helper to get primary color RGB from CSS variable
+    const getPrimaryColorRGB = () => {
+      const primaryColor =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue('--color-primary-500')
+          .trim() || '#6366f1'; // Fallback to indigo
+      // Convert hex to RGB
+      const hex = primaryColor.replace('#', '');
+      const r = parseInt(hex.substring(0, 2), 16);
+      const g = parseInt(hex.substring(2, 4), 16);
+      const b = parseInt(hex.substring(4, 6), 16);
+      return { r, g, b };
+    };
+
+    const primaryRGB = getPrimaryColorRGB();
 
     // Animation loop
     const animate = () => {
@@ -125,7 +148,7 @@ export default function StarfieldBackground() {
 
         // Draw star
         const alpha = Math.min(currentBrightness * proximityBrightness, 1);
-        ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`; // primary-500 blue
+        ctx.fillStyle = `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${alpha})`;
         ctx.beginPath();
         ctx.arc(
           star.x,
@@ -148,8 +171,14 @@ export default function StarfieldBackground() {
             star.y,
             glowSize
           );
-          gradient.addColorStop(0, `rgba(59, 130, 246, ${glowAlpha})`);
-          gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          gradient.addColorStop(
+            0,
+            `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${glowAlpha})`
+          );
+          gradient.addColorStop(
+            1,
+            `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0)`
+          );
           ctx.fillStyle = gradient;
           ctx.beginPath();
           ctx.arc(star.x, star.y, glowSize, 0, Math.PI * 2);
@@ -173,9 +202,22 @@ export default function StarfieldBackground() {
             point.y,
             20
           );
-          gradient.addColorStop(0, `rgba(59, 130, 246, ${opacity * 0.8})`);
-          gradient.addColorStop(0.5, `rgba(59, 130, 246, ${opacity * 0.4})`);
-          gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          gradient.addColorStop(
+            0,
+            `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${
+              opacity * 0.8
+            })`
+          );
+          gradient.addColorStop(
+            0.5,
+            `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${
+              opacity * 0.4
+            })`
+          );
+          gradient.addColorStop(
+            1,
+            `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0)`
+          );
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
@@ -186,7 +228,7 @@ export default function StarfieldBackground() {
           if (index > 0) {
             const prevPoint = trailRef.current[index - 1];
             const lineOpacity = opacity * 0.3;
-            ctx.strokeStyle = `rgba(59, 130, 246, ${lineOpacity})`;
+            ctx.strokeStyle = `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${lineOpacity})`;
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(prevPoint.x, prevPoint.y);
@@ -196,37 +238,55 @@ export default function StarfieldBackground() {
         }
       });
 
-      // Connect nearby stars when cursor is close
+      // Connect nearby stars when cursor is close (optimized)
       const connectionDistance = 200;
-      starsRef.current.forEach((star1, i) => {
-        const dx1 = star1.x - mouseX;
-        const dy1 = star1.y - mouseY;
-        const dist1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+      const maxConnections = 20; // Limit connections for performance
+      let connectionCount = 0;
 
-        if (dist1 < connectionDistance) {
-          starsRef.current.slice(i + 1).forEach((star2) => {
-            const dx2 = star2.x - mouseX;
-            const dy2 = star2.y - mouseY;
-            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+      // Pre-filter stars near mouse to reduce iterations
+      const nearbyStars = starsRef.current
+        .map((star, i) => {
+          const dx = star.x - mouseX;
+          const dy = star.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          return { star, dist, index: i };
+        })
+        .filter((item) => item.dist < connectionDistance)
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, 15); // Limit to closest 15 stars
 
-            if (dist2 < connectionDistance) {
-              const starDx = star2.x - star1.x;
-              const starDy = star2.y - star1.y;
-              const starDist = Math.sqrt(starDx * starDx + starDy * starDy);
+      // Only check connections between nearby stars
+      for (
+        let i = 0;
+        i < nearbyStars.length && connectionCount < maxConnections;
+        i++
+      ) {
+        const star1 = nearbyStars[i].star;
+        for (
+          let j = i + 1;
+          j < nearbyStars.length && connectionCount < maxConnections;
+          j++
+        ) {
+          const star2 = nearbyStars[j].star;
+          const starDx = star2.x - star1.x;
+          const starDy = star2.y - star1.y;
+          const starDistSq = starDx * starDx + starDy * starDy;
 
-              if (starDist < 150) {
-                const opacity = (1 - starDist / 150) * 0.2;
-                ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(star1.x, star1.y);
-                ctx.lineTo(star2.x, star2.y);
-                ctx.stroke();
-              }
-            }
-          });
+          // Use squared distance to avoid sqrt
+          if (starDistSq < 22500) {
+            // 150^2
+            const starDist = Math.sqrt(starDistSq);
+            const opacity = (1 - starDist / 150) * 0.2;
+            ctx.strokeStyle = `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(star1.x, star1.y);
+            ctx.lineTo(star2.x, star2.y);
+            ctx.stroke();
+            connectionCount++;
+          }
         }
-      });
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };

@@ -59,7 +59,7 @@ export default function Navbar() {
         <div className='flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8'>
           <motion.a
             href='#home'
-            className='font-heading text-xl font-bold text-primary-600 dark:text-primary-400 text-3d'
+            className='font-heading text-xl font-bold text-primary-600 dark:text-primary-400'
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

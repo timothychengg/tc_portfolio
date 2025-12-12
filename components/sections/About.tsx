@@ -3,6 +3,14 @@
 import { motion } from 'framer-motion';
 import SubtleStarfield from '@/components/SubtleStarfield';
 
+const aboutGradientStyle = {
+  background:
+    'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 100%)',
+  WebkitBackgroundClip: 'text',
+  backgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+} as React.CSSProperties;
+
 export default function About() {
   return (
     <section
@@ -20,28 +28,32 @@ export default function About() {
           className='max-w-3xl mx-auto'
         >
           <h2
-            className='font-heading text-4xl md:text-5xl font-bold mb-8 text-center text-3d'
-            style={{
-              background:
-                'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+            className='font-heading text-4xl md:text-5xl font-bold mb-8 text-center'
+            style={aboutGradientStyle}
           >
             About Me
           </h2>
 
           <div className='space-y-6 text-lg text-gray-300 dark:text-gray-300 leading-relaxed'>
             <p>
-              Frontend developer focused on React, Next.js, and TypeScript. I
-              build production applications with attention to performance,
-              accessibility, and maintainable code.
+              Frontend Software Engineer with expertise in React, Next.js, and
+              TypeScript. I specialize in building scalable, performant
+              applications with modern architecture patterns, focusing on state
+              management, data layer optimization, and accessible design
+              systems.
             </p>
             <p>
-              Experience includes component architecture, state management, API
-              integration, and responsive design. I work with design systems,
-              implement testing strategies, and optimize for Core Web Vitals.
+              My experience spans front-end architecture modernization, React
+              Query data layer implementation, and design system engineering.
+              I've worked with technologies including Supabase, MongoDB,
+              Express, and Kubernetes, delivering solutions that improve
+              performance, reduce bundle sizes, and enhance developer
+              experience.
+            </p>
+            <p>
+              Currently working at Laer Health, where I focus on platform-wide
+              optimizations and building accessible, scalable UI components that
+              meet WCAG 2.1 AA standards.
             </p>
           </div>
         </motion.div>

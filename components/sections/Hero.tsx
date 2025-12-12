@@ -2,12 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import { useCallback } from 'react';
 import StarfieldBackground from '@/components/StarfieldBackground';
 
+const gradientStyle = {
+  background:
+    'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 50%, var(--color-accent-400) 100%)',
+  WebkitBackgroundClip: 'text',
+  backgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+} as React.CSSProperties;
+
 export default function Hero() {
-  const scrollToNext = () => {
+  const scrollToNext = useCallback(() => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   return (
     <section
@@ -23,16 +32,8 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
         >
           <motion.h1
-            className='font-heading text-5xl md:text-7xl font-bold mb-6 text-3d-strong'
-            style={{
-              background:
-                'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 50%, var(--color-accent-400) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              filter:
-                'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2))',
-            }}
+            className='font-heading text-5xl md:text-7xl font-bold mb-6'
+            style={gradientStyle}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -46,7 +47,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            Frontend Developer
+            Frontend Software Engineer
           </motion.p>
 
           <motion.p
@@ -55,7 +56,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            React, Next.js, TypeScript
+            React • Next.js • TypeScript • React Query • Supabase
           </motion.p>
 
           <motion.div
