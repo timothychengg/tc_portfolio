@@ -11,30 +11,39 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 const nunito = Nunito({
   subsets: ['latin'],
   variable: '--font-nunito',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
+  adjustFontFallback: true,
 });
 const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://timothycheng.dev'),
   title: {
-    default: 'Timothy Cheng - Portfolio',
+    default: 'Timothy Cheng - Frontend Software Engineer',
     template: '%s | Timothy Cheng',
   },
-  description: 'Frontend Developer Portfolio - React, Next.js, TypeScript',
+  description:
+    'Timothy Cheng - Frontend Software Engineer specializing in React, Next.js, and TypeScript. Building scalable, performant web applications with modern architecture patterns, React Query, and Supabase.',
   keywords: [
     'Frontend Developer',
+    'Frontend Software Engineer',
     'React',
     'Next.js',
     'TypeScript',
+    'React Query',
+    'Supabase',
     'Portfolio',
+    'Software Engineer',
+    'Web Developer',
   ],
   authors: [{ name: 'Timothy Cheng' }],
   creator: 'Timothy Cheng',
@@ -43,8 +52,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://timothycheng.dev',
     siteName: 'Timothy Cheng Portfolio',
-    title: 'Timothy Cheng - Frontend Developer',
-    description: 'Frontend Developer Portfolio - React, Next.js, TypeScript',
+    title: 'Timothy Cheng - Frontend Software Engineer',
+    description:
+      'Frontend Software Engineer specializing in React, Next.js, and TypeScript. Building scalable, performant web applications.',
     images: [
       {
         url: '/og-image.jpg',
@@ -56,8 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timothy Cheng - Frontend Developer',
-    description: 'Frontend Developer Portfolio - React, Next.js, TypeScript',
+    title: 'Timothy Cheng - Frontend Software Engineer',
+    description:
+      'Frontend Software Engineer specializing in React, Next.js, and TypeScript. Building scalable, performant web applications.',
     creator: '@timothycheng',
     images: ['/og-image.jpg'],
   },
@@ -87,10 +98,17 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='canonical' href='https://timothycheng.dev' />
         <StructuredData />
       </head>
       <body className={`${nunito.className} ${poppins.variable}`}>
+        <a
+          href='#main-content'
+          className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded-lg focus:font-medium focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white'
+        >
+          Skip to main content
+        </a>
         <ErrorBoundary>
           <ColorSchemeProvider>
             <ToastProvider>

@@ -43,24 +43,36 @@ export default function Toast({
   };
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, y: -50, x: '-50%' }}
-          animate={{ opacity: 1, y: 0, x: '-50%' }}
-          exit={{ opacity: 0, y: -50, x: '-50%' }}
-          className={`fixed top-4 left-1/2 z-[9999] flex items-center gap-3 px-4 py-3 rounded-lg border backdrop-blur-sm ${colors[type]} shadow-lg`}
-        >
-          {icons[type]}
-          <span className='text-sm font-medium'>{message}</span>
-          <button
-            onClick={onClose}
-            className='ml-2 hover:opacity-70 transition-opacity'
+    <>
+      <div
+        role='status'
+        aria-live='polite'
+        aria-atomic='true'
+        className='sr-only'
+      >
+        {isVisible && message}
+      </div>
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: -50, x: '-50%' }}
+            className={`fixed top-4 left-1/2 z-[9999] flex items-center gap-3 px-4 py-3 rounded-lg border backdrop-blur-sm ${colors[type]} shadow-lg`}
+            role='alert'
           >
-            <X className='w-4 h-4' />
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <span aria-hidden='true'>{icons[type]}</span>
+            <span className='text-sm font-medium'>{message}</span>
+            <button
+              onClick={onClose}
+              className='ml-2 hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-white/50 rounded transition-opacity'
+              aria-label='Close notification'
+            >
+              <X className='w-4 h-4' aria-hidden='true' />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

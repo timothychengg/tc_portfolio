@@ -12,17 +12,21 @@ const Projects = dynamic(() => import('@/components/sections/Projects'), {
 const Experience = dynamic(() => import('@/components/sections/Experience'), {
   loading: () => <SectionLoader />,
 });
+const Education = dynamic(() => import('@/components/sections/Education'), {
+  loading: () => <SectionLoader />,
+});
 const Contact = dynamic(() => import('@/components/sections/Contact'), {
   loading: () => <SectionLoader />,
 });
 
 export default function Home() {
   return (
-    <main>
+    <main id='main-content'>
       <Hero />
       <About />
       <Projects />
       <Experience />
+      <Education />
       <Contact />
     </main>
   );

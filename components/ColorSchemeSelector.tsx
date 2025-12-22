@@ -16,7 +16,7 @@ export default function ColorSchemeSelector() {
     <div className='relative'>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className='p-2 rounded-lg bg-gray-800/50 border border-primary-500/30 hover:border-primary-500 text-gray-200 hover:text-primary-400 transition-colors'
+        className='p-2 rounded-lg bg-white border border-gray-300 hover:border-black text-gray-600 hover:text-black transition-colors'
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label='Select color scheme'
@@ -36,9 +36,9 @@ export default function ColorSchemeSelector() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className='absolute right-0 top-12 z-50 w-72 bg-gray-800 border border-primary-500/40 rounded-lg shadow-xl p-4 space-y-2 max-h-[80vh] overflow-y-auto'
+              className='absolute right-0 top-12 z-50 w-72 bg-white border border-gray-300 rounded-lg shadow-xl p-4 space-y-2 max-h-[80vh] overflow-y-auto'
             >
-              <h3 className='text-sm font-semibold text-gray-200 mb-3'>
+              <h3 className='text-sm font-semibold text-black mb-3'>
                 Color Schemes
               </h3>
               {schemes.map((scheme) => (
@@ -50,8 +50,8 @@ export default function ColorSchemeSelector() {
                   }}
                   className={`w-full text-left p-3 rounded-lg transition-all ${
                     currentScheme === scheme.id
-                      ? 'bg-primary-600/20 border-2 border-primary-500'
-                      : 'bg-gray-700/50 border-2 border-transparent hover:border-primary-500/50'
+                      ? 'bg-gray-100 border-2 border-black'
+                      : 'bg-white border-2 border-transparent hover:border-gray-300'
                   }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -59,20 +59,20 @@ export default function ColorSchemeSelector() {
                   <div className='flex items-center gap-3'>
                     <div className='text-2xl'>{scheme.emoji}</div>
                     <div className='flex-1 min-w-0'>
-                      <div className='text-sm font-medium text-gray-200 truncate'>
+                      <div className='text-sm font-medium text-black truncate'>
                         {scheme.name}
                       </div>
-                      <div className='text-xs text-gray-400 truncate'>
+                      <div className='text-xs text-gray-600 truncate'>
                         {scheme.description}
                       </div>
                     </div>
                     <div className='flex gap-1'>
                       <div
-                        className='w-4 h-4 rounded-full border border-gray-600'
+                        className='w-4 h-4 rounded-full border border-gray-300'
                         style={{ backgroundColor: scheme.primary[500] }}
                       />
                       <div
-                        className='w-4 h-4 rounded-full border border-gray-600'
+                        className='w-4 h-4 rounded-full border border-gray-300'
                         style={{ backgroundColor: scheme.accent[500] }}
                       />
                     </div>

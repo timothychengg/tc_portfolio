@@ -24,12 +24,13 @@ export default function ResumeDownload() {
   return (
     <motion.button
       onClick={handleViewResume}
-      className='flex items-center gap-1.5 px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs font-medium transition-all'
+      className='flex items-center gap-1.5 px-3 py-1.5 bg-black hover:bg-gray-800 text-white rounded-lg text-xs font-medium focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all'
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       title='View Resume'
+      aria-label='View resume PDF in new window'
     >
-      <FileText className='w-3.5 h-3.5' />
+      <FileText className='w-3.5 h-3.5' aria-hidden='true' />
       <span className='hidden sm:inline'>Resume</span>
     </motion.button>
   );

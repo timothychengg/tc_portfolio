@@ -4,6 +4,10 @@ const nextConfig = {
   swcMinify: true,
   compress: true,
   poweredByHeader: false,
+  optimizeFonts: true,
+  experimental: {
+    optimizeCss: true,
+  },
 
   // Image optimization
   images: {
@@ -42,6 +46,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
           },
         ],
       },

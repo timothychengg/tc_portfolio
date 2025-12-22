@@ -27,6 +27,7 @@ export default function StructuredData() {
       '@type': 'CollegeOrUniversity',
       name: 'University of California, Santa Barbara',
     },
+    '@id': 'https://timothycheng.dev/#person',
   };
 
   return (

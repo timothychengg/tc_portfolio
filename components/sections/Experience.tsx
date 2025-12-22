@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import SubtleStarfield from '@/components/SubtleStarfield';
 
 interface ExperienceItem {
   title: string;
@@ -59,55 +58,41 @@ export default function Experience() {
     <section
       id='experience'
       className='section-padding relative overflow-hidden'
-      style={{ backgroundColor: 'var(--color-background)' }}
+      style={{ backgroundColor: '#ffffff' }}
     >
-      <SubtleStarfield />
-      <div className='container-custom relative z-10'>
+      <div className='container-custom relative z-10 max-w-4xl mx-auto'>
         <motion.h2
-          className='font-heading text-4xl md:text-5xl font-bold mb-12 text-center'
-          style={{
-            background:
-              'linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-500) 50%, var(--color-accent-400) 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
+          className='font-heading text-4xl md:text-5xl font-bold mb-12 text-black'
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.4 }}
         >
           Experience
         </motion.h2>
 
-        <div className='max-w-3xl mx-auto space-y-8'>
+        <div className='space-y-10'>
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-              className='relative pl-8 border-l-2 border-primary-500'
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <div
-                className='absolute -left-2.5 top-0 w-5 h-5 bg-primary-500 rounded-full border-2 shadow-[0_0_10px_var(--color-primary-500)]'
-                style={{ borderColor: 'var(--color-background)' }}
-              ></div>
-
-              <div className='mb-2'>
-                <h3 className='font-heading text-xl font-semibold text-gray-200'>
+              <div className='mb-3'>
+                <h3 className='font-heading text-xl md:text-2xl font-semibold text-black mb-1'>
                   {exp.title}
                 </h3>
-                <p className='text-primary-400 dark:text-primary-400 font-medium'>
+                <p className='text-gray-800 font-medium mb-1'>
                   {exp.company}
                 </p>
-                <p className='text-sm text-gray-400 dark:text-gray-400'>
+                <p className='text-sm text-gray-600'>
                   {exp.period}
                 </p>
               </div>
 
-              <ul className='list-disc list-inside space-y-1 text-gray-200'>
+              <ul className='list-disc list-inside space-y-2 text-gray-700 mt-4'>
                 {exp.description.map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}

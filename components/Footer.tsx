@@ -24,10 +24,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: 'var(--color-background)' }}>
+    <footer style={{ backgroundColor: '#ffffff' }}>
       <div className='container-custom section-padding'>
         <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
-          <p className='text-sm text-gray-400'>
+          <p className='text-sm text-gray-600'>
             © {currentYear} Timothy Cheng. All rights reserved.
           </p>
 
@@ -38,7 +38,7 @@ export default function Footer() {
                 href={link.href}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-300 hover:text-accent-400 transition-colors'
+                className='text-gray-600 hover:text-black transition-colors'
                 whileHover={{ scale: 1.2, y: -2 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label={link.name}
@@ -47,6 +47,7 @@ export default function Footer() {
                   className='w-6 h-6'
                   fill='currentColor'
                   viewBox='0 0 24 24'
+                  aria-hidden='true'
                 >
                   <path d={link.icon} />
                 </svg>
