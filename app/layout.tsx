@@ -7,6 +7,7 @@ import { ToastProvider } from '@/components/ToastProvider';
 import { ColorSchemeProvider } from '@/contexts/ColorSchemeContext';
 import StructuredData from '@/components/StructuredData';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import Analytics from '@/components/Analytics';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -100,6 +101,18 @@ export default function RootLayout({
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='canonical' href='https://timothycheng.dev' />
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+        <meta name='theme-color' content='#ffffff' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
+        <link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+        <link rel='dns-prefetch' href='https://fonts.gstatic.com' />
         <StructuredData />
       </head>
       <body className={`${nunito.className} ${poppins.variable}`}>
@@ -118,6 +131,7 @@ export default function RootLayout({
             </ToastProvider>
           </ColorSchemeProvider>
         </ErrorBoundary>
+        <Analytics />
       </body>
     </html>
   );

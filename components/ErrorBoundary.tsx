@@ -28,8 +28,12 @@ export class ErrorBoundary extends Component<Props, State> {
     if (process.env.NODE_ENV === 'development') {
       console.error('ErrorBoundary caught an error:', error, errorInfo);
     }
-    // In production, you could send to error tracking service
-    // Example: Sentry.captureException(error, { contexts: { react: errorInfo } });
+    // In production, send to error tracking service
+    // Uncomment and configure when ready:
+    // if (process.env.NODE_ENV === 'production') {
+    //   // Sentry.captureException(error, { contexts: { react: errorInfo } });
+    //   // LogRocket.captureException(error, { extra: errorInfo });
+    // }
   }
 
   render() {

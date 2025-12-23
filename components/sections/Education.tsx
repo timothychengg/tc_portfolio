@@ -11,14 +11,9 @@ interface EducationItem {
 
 const education: EducationItem[] = [
   {
-    degree: 'Bachelor of Science in Computer Science',
-    institution: 'University Name',
-    period: '2018 - 2022',
-    details: [
-      'Graduated with honors',
-      "Dean's List multiple semesters",
-      'Relevant coursework: Data Structures, Algorithms, Software Engineering',
-    ],
+    degree: 'Bachelor of Science',
+    institution: 'University of California, Santa Barbara',
+    period: '',
   },
 ];
 
