@@ -5,9 +5,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   optimizeFonts: true,
-  experimental: {
-    optimizeCss: true,
-  },
 
   // Production optimizations
   productionBrowserSourceMaps: false,

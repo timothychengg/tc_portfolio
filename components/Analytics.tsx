@@ -25,12 +25,15 @@ export default function Analytics() {
       // Try to load web-vitals, but fail silently if not installed
       import('web-vitals')
         .then((webVitals) => {
-          const { onCLS, onFID, onFCP, onLCP, onTTFB } = webVitals;
+          const { onCLS, onFCP, onLCP, onTTFB, onINP } = webVitals;
           onCLS(reportWebVitals);
-          onFID(reportWebVitals);
           onFCP(reportWebVitals);
           onLCP(reportWebVitals);
           onTTFB(reportWebVitals);
+          // onINP replaced onFID in web-vitals v3+
+          if (onINP) {
+            onINP(reportWebVitals);
+          }
         })
         .catch(() => {
           // web-vitals is optional - silently fail if not installed
