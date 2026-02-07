@@ -34,15 +34,6 @@ const experiences: ExperienceItem[] = [
       'Defined typed API boundary contracts using TypeScript and Zod, reducing integration defects and eliminating runtime type mismatches',
     ],
   },
-  {
-    title: 'Full-Stack Software Engineer',
-    company: 'OSLabs',
-    period: 'Sept 2024 – Nov 2024',
-    description: [
-      'Developed a real-time Kubernetes observability interface integrating Prometheus scrapes, delivering sub-second metric feedback for CPU and memory anomaly detection',
-      'Optimized polling intervals, batching logic, and typed hydration flows, reducing metric-fetch overhead by 30% while improving UI responsiveness under load',
-    ],
-  },
 ];
 
 export default function Experience() {
